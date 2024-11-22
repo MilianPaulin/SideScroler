@@ -19,22 +19,23 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float gravityDelay = 0.2f;
 
     // private variables
-    Vector2 movementVector, movementVelocity;
+    Vector2 movementVector;
     float timeInAir, coyoteTimer;
     bool doubleJumpAvailable;
 
     // cached references
     Rigidbody2D playerRigidbody;
+    Animator playerAnimator;
 
     void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
+        playerAnimator = GetComponentInChildren<Animator>();
     }
 
     void Update()
     {
         CoyoteTimer();
-        HandleSpriteFlip();
         GravityDelay();
     }
 
@@ -42,6 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         Move();
         ExtraGravity();
+        HandleSpriteFlip();
     }
 
     void OnMove(InputValue value)
@@ -120,8 +122,10 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
-        movementVelocity = new Vector2(movementVector.x * moveSpeed, playerRigidbody.linearVelocity.y);
-        playerRigidbody.linearVelocity = movementVelocity;
+        playerRigidbody.linearVelocityX = movementVector.x * moveSpeed;
+
+        bool playerHasHorizontalSpeed = Mathf.Abs(playerRigidbody.linearVelocityX) > Mathf.Epsilon;
+        playerAnimator.SetBool("isRun", playerHasHorizontalSpeed);
     }
 
     void HandleSpriteFlip()
