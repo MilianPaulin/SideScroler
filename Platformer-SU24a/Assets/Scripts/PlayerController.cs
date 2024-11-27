@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     // configurable parameters
     [Header("Movement")]
     [SerializeField] float moveSpeed = 5f;
-    [SerializeField] float jumpStrength = 10f;
+    [SerializeField] float jumpStrength = 12f;
     [SerializeField] float coyoteTime = 0.5f;
 
     [Header("Ground Check")]
@@ -15,8 +15,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
 
     [Header("Gravity")]
-    [SerializeField] float extraGravity = 1000f;
+    [SerializeField] float extraGravity = 1200f;
     [SerializeField] float gravityDelay = 0.2f;
+    [SerializeField] float maxFallSpeedVelocity = -20f;
 
     // private variables
     Vector2 movementVector;
@@ -44,6 +45,7 @@ public class PlayerController : MonoBehaviour
         Move();
         ExtraGravity();
         HandleSpriteFlip();
+        CheckJumpAnimation();
     }
 
     void OnMove(InputValue value)
@@ -73,6 +75,8 @@ public class PlayerController : MonoBehaviour
 
     void ApplyJumpForce()
     {
+        playerAnimator.SetBool("isJump", true);
+
         playerRigidbody.linearVelocity = Vector2.zero;
         timeInAir = 0f;
         coyoteTimer = 0f;
@@ -96,6 +100,11 @@ public class PlayerController : MonoBehaviour
         if (timeInAir > gravityDelay)
         {
             playerRigidbody.AddForce(new Vector2(0f, -extraGravity * Time.deltaTime));
+
+            if (playerRigidbody.linearVelocityY < maxFallSpeedVelocity)
+            {
+                playerRigidbody.linearVelocityY = maxFallSpeedVelocity;
+            }
         }
     }
 
@@ -142,6 +151,12 @@ public class PlayerController : MonoBehaviour
             // Turn right
             transform.eulerAngles = new Vector3(0f, 0f, 0f);
         }
+    }
+
+    void CheckJumpAnimation()
+    {
+        bool isJumping = !CheckGrounded() && Mathf.Abs(playerRigidbody.linearVelocityY) > Mathf.Epsilon;
+        playerAnimator.SetBool("isJump", isJumping);
     }
 
     void OnDrawGizmos()
