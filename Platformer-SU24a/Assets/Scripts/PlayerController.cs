@@ -26,11 +26,13 @@ public class PlayerController : MonoBehaviour
 
     // cached references
     Rigidbody2D playerRigidbody;
+    Health health;
     Animator playerAnimator;
 
     void Awake()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
+        health = GetComponent<Health>();
         playerAnimator = GetComponentInChildren<Animator>();
     }
 
@@ -50,11 +52,15 @@ public class PlayerController : MonoBehaviour
 
     void OnMove(InputValue value)
     {
+        if (health.GetIsDead()) { return; }
+
         movementVector = value.Get<Vector2>();
     }
 
     void OnJump(InputValue value)
     {
+        if (health.GetIsDead()) { return; }
+
         if (value.isPressed)
         {
             if (CheckGrounded())
@@ -131,6 +137,12 @@ public class PlayerController : MonoBehaviour
 
     void Move()
     {
+        if (health.GetIsDead())
+        {
+            playerRigidbody.linearVelocityX = 0f;
+            return;
+        }
+
         playerRigidbody.linearVelocityX = movementVector.x * moveSpeed;
 
         bool playerHasHorizontalSpeed = Mathf.Abs(playerRigidbody.linearVelocityX) > Mathf.Epsilon;
@@ -139,6 +151,8 @@ public class PlayerController : MonoBehaviour
 
     void HandleSpriteFlip()
     {
+        if (health.GetIsDead()) { return; }
+
         Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 
         if (mousePosition.x < transform.position.x)

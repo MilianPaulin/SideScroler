@@ -17,10 +17,12 @@ public class EnemyController : MonoBehaviour
 
     // cached references
     Rigidbody2D enemyRigidbody;
+    Health health;
 
     void Awake()
     {
         enemyRigidbody = GetComponent<Rigidbody2D>();
+        health = GetComponent<Health>();
     }
 
     void FixedUpdate()
@@ -31,6 +33,12 @@ public class EnemyController : MonoBehaviour
 
     void Move()
     {
+        if (health.GetIsDead())
+        {
+            enemyRigidbody.linearVelocityX = 0f;
+            return;
+        }
+
         if (CheckGrounded())
         {
             enemyRigidbody.linearVelocityX = transform.right.x * moveSpeed;
