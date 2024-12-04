@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1008207693742568566}
   - component: {fileID: 5438880123338967822}
   - component: {fileID: 4354979597388204513}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -129,7 +129,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7623003599475632061}
   - component: {fileID: 4581102442216948589}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Triangle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -216,7 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3025699541584945068}
   - component: {fileID: 2480631545753718918}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Circle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -302,7 +302,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6426950051574735397}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: LeadCheck
   m_TagString: Untagged
   m_Icon: {fileID: 0}

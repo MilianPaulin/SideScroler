@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
     // configurable parameters
     [Header("Movement")]
     [SerializeField] float moveSpeed = 5f;
-    [SerializeField] float jumpStrength = 12f;
+    [SerializeField] float jumpStrength = 7f;
     [SerializeField] float coyoteTime = 0.5f;
 
     [Header("Ground Check")]
@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] LayerMask groundLayer;
 
     [Header("Gravity")]
-    [SerializeField] float extraGravity = 1200f;
+    [SerializeField] float extraGravity = 700f;
     [SerializeField] float gravityDelay = 0.2f;
     [SerializeField] float maxFallSpeedVelocity = -20f;
 

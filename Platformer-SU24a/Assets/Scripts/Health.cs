@@ -31,6 +31,11 @@ public class Health : MonoBehaviour
         if (healthPoints <= 0)
         {
             isDead = true;
+
+            if (!isPlayer)
+            {
+                Destroy(this.gameObject);
+            }
         }
     }
 
