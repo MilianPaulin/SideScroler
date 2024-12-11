@@ -9,7 +9,7 @@ public class Knockback : MonoBehaviour
     // Private variables
     Vector3 hitDirection;
     float knockbackThrust;
-    bool gettingKnockedback = false;
+    bool isKnockedBack = false;
 
     // Cached references
     Rigidbody2D rigidBody;
@@ -21,10 +21,9 @@ public class Knockback : MonoBehaviour
 
     public void GetKnockedBack(Vector3 hitDirection, float knockbackThrust)
     {
-        Debug.Log(gameObject.transform.name + " got knocked back!");
         this.hitDirection = hitDirection;
         this.knockbackThrust = knockbackThrust;
-        gettingKnockedback = true;
+        isKnockedBack = true;
         ApplyKnockbackForce();
     }
 
@@ -47,11 +46,11 @@ public class Knockback : MonoBehaviour
     void StopKnockRoutine()
     {
         rigidBody.linearVelocity = Vector2.zero;
-        gettingKnockedback = false;
+        isKnockedBack = false;
     }
 
-    public bool GetGettingKnockedback()
+    public bool GetIsKnockedBack()
     {
-        return gettingKnockedback;
+        return isKnockedBack;
     }
 }

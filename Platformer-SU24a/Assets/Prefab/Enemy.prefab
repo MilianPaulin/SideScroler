@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5438880123338967822}
   - component: {fileID: 4354979597388204513}
   - component: {fileID: -1016476546202863910}
+  - component: {fileID: 8532582319470842628}
   m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
@@ -114,9 +115,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   moveSpeed: 1
+  damageAmount: 1
+  knockbackThrust: 5
   ledgeCheckPosition: {fileID: 6426950051574735397}
   ledgeCheckLength: 0.25
-  groundCheck: 0.6
+  groundCheck: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -133,8 +136,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   livesText: {fileID: 0}
-  healthPoints: 20
+  healthPoints: 5
   isPlayer: 0
+--- !u!114 &8532582319470842628
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2026105262374531087}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e5299279d29a486469a1c2dd195c48a3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  knockbackTime: 0.05
 --- !u!1 &3888232882345011417
 GameObject:
   m_ObjectHideFlags: 0

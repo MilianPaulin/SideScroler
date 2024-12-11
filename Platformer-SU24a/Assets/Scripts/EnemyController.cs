@@ -5,6 +5,8 @@ public class EnemyController : MonoBehaviour
     // configurable parameters
     [Header("Enemy Stats")]
     [SerializeField] float moveSpeed = 1f;
+    [SerializeField] int damageAmount = 1;
+    [SerializeField] float knockbackThrust = 5f;
 
     [Header("Ground & Ledge Detection")]
     [SerializeField] Transform ledgeCheckPosition;
@@ -18,17 +20,22 @@ public class EnemyController : MonoBehaviour
     // cached references
     Rigidbody2D enemyRigidbody;
     Health health;
+    Knockback knockback;
 
     void Awake()
     {
         enemyRigidbody = GetComponent<Rigidbody2D>();
         health = GetComponent<Health>();
+        knockback = GetComponent<Knockback>();
     }
 
     void FixedUpdate()
     {
-        Move();
-        LedgeCheck();
+        if (!knockback.GetIsKnockedBack())
+        {
+            Move();
+            LedgeCheck();
+        }
     }
 
     void Move()
@@ -77,6 +84,15 @@ public class EnemyController : MonoBehaviour
         Collider2D isGrounded = Physics2D.OverlapCircle(transform.position, groundCheck, groundLayer);
 
         return isGrounded;
+    }
+
+    private void OnCollisionEnter2D(Collision2D other)
+    {
+        Health health = other.gameObject.GetComponent<Health>();
+        health?.TakeDamage(damageAmount);
+
+        Knockback knockback = other.gameObject.GetComponent<Knockback>();
+        knockback?.GetKnockedBack(transform.position, knockbackThrust);
     }
 
     void OnDrawGizmos()

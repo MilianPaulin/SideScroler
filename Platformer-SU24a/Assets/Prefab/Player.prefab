@@ -48,6 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPrefab: {fileID: 7823068016762938725, guid: 95526a9f1c20d2c45a94d7b095545def, type: 3}
   bulletSpawnPoint: {fileID: 9217360824377463491}
+  gunFireCD: 0.2
 --- !u!1 &501908992482938681
 GameObject:
   m_ObjectHideFlags: 0
@@ -176,10 +177,11 @@ GameObject:
   m_Component:
   - component: {fileID: 7834157319575043188}
   - component: {fileID: 6719842291847076486}
-  - component: {fileID: 4036799834760543015}
   - component: {fileID: 303952589744637039}
   - component: {fileID: 584098000122964206}
   - component: {fileID: 7606434854769157137}
+  - component: {fileID: 4036799834760543015}
+  - component: {fileID: 7581789914598607403}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -232,29 +234,6 @@ Rigidbody2D:
   m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
---- !u!114 &4036799834760543015
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6428600712631894104}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bb1a47877fd5ea04594fc251ae8c2c6c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  moveSpeed: 5
-  jumpStrength: 12
-  coyoteTime: 0.2
-  feetTransform: {fileID: 8503815307263993546}
-  groundCheck: {x: 0.8, y: 0.5}
-  groundLayer:
-    serializedVersion: 2
-    m_Bits: 64
-  extraGravity: 1200
-  gravityDelay: 0.1
-  maxFallSpeedVelocity: -20
 --- !u!114 &303952589744637039
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -358,6 +337,44 @@ CircleCollider2D:
   m_CompositeOrder: 0
   m_Offset: {x: 0.0022611618, y: -0.036255747}
   m_Radius: 0.42288697
+--- !u!114 &4036799834760543015
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6428600712631894104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb1a47877fd5ea04594fc251ae8c2c6c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  moveSpeed: 5
+  jumpStrength: 12
+  coyoteTime: 0.2
+  feetTransform: {fileID: 8503815307263993546}
+  groundCheck: {x: 0.8, y: 0.5}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 64
+  extraGravity: 1200
+  gravityDelay: 0.1
+  maxFallSpeedVelocity: -20
+--- !u!114 &7581789914598607403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6428600712631894104}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 420a873cdf021dc47abcf08f6626c946, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  livesText: {fileID: 0}
+  healthPoints: 10
+  isPlayer: 1
 --- !u!1 &8426236860853848239
 GameObject:
   m_ObjectHideFlags: 0
